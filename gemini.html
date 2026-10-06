@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人品牌攝影 | 用光影捕捉靈魂</title>
+    
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 引入 Google Fonts (Noto Serif TC for headers, Noto Sans TC for body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 加入手寫字體 (用於簽名) -->
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+    
+    <!-- 引入 Phosphor Icons (for icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                        serif: ['"Noto Serif TC"', 'serif'],
+                    },
+                    colors: {
+                        dark: '#0a0a0a',
+                        darker: '#050505',
+                        accent: '#d4af37', // 柔和的金黃色作為點綴
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 自定義樣式與過渡效果 */
+        body {
+            background-color: #0a0a0a;
+            color: #f3f4f6;
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        .gallery-item {
+            transition: all 0.4s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        /* 隱藏滾動條但保留功能 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+        /* 燈箱樣式 */
+        #lightbox {
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-accent selection:text-dark">
+
+    <!-- 導覽列 -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 px-6 md:px-12 border-b border-white/10 bg-dark/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="font-serif text-2xl font-bold tracking-widest text-white">
+                STUDIO<span class="text-accent">.</span>
+            </a>
+            
+            <!-- 桌面版選單 -->
+            <div class="hidden md:flex space-x-8 text-sm tracking-wider text-gray-300">
+                <a href="#home" class="hover:text-accent transition-colors">首頁 HOME</a>
+                <a href="#about" class="hover:text-accent transition-colors">關於 ABOUT</a>
+                <a href="#services" class="hover:text-accent transition-colors">服務 SERVICES</a>
+                <a href="#portfolio" class="hover:text-accent transition-colors">作品 PORTFOLIO</a>
+                <a href="#contact" class="hover:text-accent transition-colors">預約 CONTACT</a>
+            </div>
+
+            <!-- 手機版漢堡按鈕 -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                <i class="ph ph-list text-3xl"></i>
+            </button>
+        </div>
+
+        <!-- 手機版選單 (預設隱藏) -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-darker border-b border-white/10 flex flex-col items-center py-6 space-y-6 text-sm tracking-widest shadow-2xl">
+            <a href="#home" class="mobile-link hover:text-accent transition-colors">首頁 HOME</a>
+            <a href="#about" class="mobile-link hover:text-accent transition-colors">關於 ABOUT</a>
+            <a href="#services" class="mobile-link hover:text-accent transition-colors">服務 SERVICES</a>
+            <a href="#portfolio" class="mobile-link hover:text-accent transition-colors">作品 PORTFOLIO</a>
+            <a href="#contact" class="mobile-link hover:text-accent transition-colors">預約 CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- 1. 首頁 (Hero Section) -->
+    <header id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- 背景圖 (使用高質感攝影棚背景) -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1605117882932-f9e32b03fea9?q=80&w=2000&auto=format&fit=crop" alt="Hero Background" class="w-full h-full object-cover object-center opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/50 to-transparent"></div>
+        </div>
+
+        <!-- 內容 -->
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20">
+            <h2 class="text-accent tracking-[0.2em] text-sm md:text-base font-light mb-4 uppercase">Photography & Visual Art</h2>
+            <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight text-shadow">
+                用光影捕捉靈魂<br>
+                <span class="text-3xl md:text-5xl font-light italic text-gray-300">定格屬於你的真實影響力</span>
+            </h1>
+            <p class="text-gray-300 text-sm md:text-base font-light tracking-wide mb-10 max-w-2xl mx-auto">
+                個人形象｜商業人像｜藝術寫真。以當代美學與心理學式引導，為您打造極具影響力的視覺名片。
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="#portfolio" class="px-8 py-3 border border-white/30 text-white hover:bg-white hover:text-dark transition-all duration-300 tracking-wider text-sm">
+                    探索作品
+                </a>
+                <a href="#contact" class="px-8 py-3 bg-accent text-dark border border-accent hover:bg-yellow-600 hover:border-yellow-600 transition-all duration-300 tracking-wider text-sm font-medium">
+                    預約拍攝諮詢
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. 關於我 (About Me) -->
+    <section id="about" class="py-24 px-6 md:px-12 lg:px-24 bg-darker">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            <!-- 圖片區 -->
+            <div class="lg:col-span-5 relative">
+                <div class="relative z-10 aspect-[3/4] overflow-hidden rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?q=80&w=800&auto=format&fit=crop" alt="Photographer" class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700">
+                </div>
+                <!-- 裝飾框 -->
+                <div class="absolute -top-4 -left-4 w-full h-full border border-accent/30 z-0"></div>
+                <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-accent/10 z-0"></div>
+            </div>
+
+            <!-- 文字區 -->
+            <div class="lg:col-span-7 space-y-8">
+                <div class="space-y-2">
+                    <h4 class="text-accent tracking-widest text-sm uppercase">About Me</h4>
+                    <h2 class="font-serif text-3xl md:text-4xl text-white">當代美學與肢體引導的創新結合</h2>
+                </div>
+                
+                <div class="space-y-6 text-gray-400 font-light leading-relaxed text-sm md:text-base">
+                    <p>
+                        你好，我是主理人。作為一名專注於個人形象、商業人像與藝術寫真的人像攝影師，我深信：一張優秀的人像作品，不單是紀錄容貌，更是展現個人特質與自信姿態的視覺名片。
+                    </p>
+                    <p>
+                        傳統人像拍攝常落入僵硬擺姿的窠臼，而我的創作核心主張<span class="text-white font-medium">「以人為本」</span>的視覺探索。我將當代時尚的光影語言注入寫真創作，並結合心理學式的肢體引導技巧，協助你放下對鏡頭的戒備。無論是企業領袖所需的權威與信任感、創作者所需的靈動風格，還是藝術寫真中的戲劇張力，我致力於在自然互動中，捕捉眼神深處最真實、動人的溫度。
+                    </p>
+                    <div class="pl-6 border-l-2 border-accent">
+                        <h3 class="text-white font-serif text-xl mb-2">全方位且值得信賴的拍攝體驗</h3>
+                        <p class="text-sm">
+                            面對鏡頭緊張是絕大多數人的日常，但在我的拍攝現場，你無需具備模特兒的經驗。從前期風格梳理、穿搭與視覺企劃，到現場燈光細節的精確雕琢，以及後期兼具真實肌理與高級質感修容，每一個環節都有明確且專業的流程支援。
+                        </p>
+                    </div>
+                    <p class="italic text-gray-300">
+                        「影像，是你與世界對話最直接的語言。歡迎來到我的工作室，讓我們一起用光影雕刻出屬於你的經典畫面。」
+                    </p>
+                </div>
+                
+                <!-- 使用 Web Font 替換原本的簽名圖片以避免破圖 -->
+                <div class="mt-8 font-['Alex_Brush'] text-4xl text-gray-400 tracking-wider">Studio Director</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 人像攝影服務方案 (Services) -->
+    <section id="services" class="py-24 px-6 md:px-12 lg:px-24 bg-dark">
+        <div class="max-w-7xl mx-auto">
+            <!-- 區塊標題 -->
+            <div class="text-center max-w-3xl mx-auto mb-20 space-y-4">
+                <h4 class="text-accent tracking-widest text-sm uppercase">Solutions</h4>
+                <h2 class="font-serif text-3xl md:text-4xl text-white">視覺賦能解決方案</h2>
+                <p class="text-gray-400 font-light text-sm md:text-base leading-relaxed">
+                    在視覺主導的時代，一張專業且具感染力的人像，絕非單純的紀錄，而是建立信任、展現權威與傳遞價值的戰略資產。我們不只提供拍攝服務，更透過全方位的解決方案，將無形的人格特質轉化為具備商業說服力與藝術質感的視覺語言。
+                </p>
+            </div>
+
+            <!-- 服務卡片 Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 服務 1 -->
+                <div class="group bg-darker p-8 border border-white/5 hover:border-accent/50 transition-colors duration-300 flex flex-col h-full cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <i class="ph ph-user-focus text-4xl text-accent mb-6"></i>
+                    <h3 class="font-serif text-xl text-white mb-4 group-hover:text-accent transition-colors">01. 企業與個人形象<br>權威打造</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed mb-6 flex-grow">
+                        專為企業高管、專業顧問與創作者設計。結合獨家心理學肢體引導與商業光影雕琢，協助你擺脫鏡頭焦慮與僵硬擺拍，精準展現值得信賴、權威且不失溫度的專業門面。
+                    </p>
+                    <a href="#contact" class="text-xs tracking-widest text-white uppercase flex items-center group-hover:text-accent transition-colors">
+                        了解方案細節 <i class="ph ph-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- 服務 2 -->
+                <div class="group bg-darker p-8 border border-white/5 hover:border-accent/50 transition-colors duration-300 flex flex-col h-full cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <i class="ph ph-buildings text-4xl text-accent mb-6"></i>
+                    <h3 class="font-serif text-xl text-white mb-4 group-hover:text-accent transition-colors">02. 商業人像與<br>品牌故事敘事</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed mb-6 flex-grow">
+                        協助品牌與企業團隊建立一致且高質感的視覺識別。從前期概念梳理、燈光氛圍佈局到精細後期修容，打造符合品牌戰略的形象大片，全面提升商業影響力與市場吸引力。
+                    </p>
+                    <a href="#contact" class="text-xs tracking-widest text-white uppercase flex items-center group-hover:text-accent transition-colors">
+                        索取企業報價 <i class="ph ph-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- 服務 3 -->
+                <div class="group bg-darker p-8 border border-white/5 hover:border-accent/50 transition-colors duration-300 flex flex-col h-full cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <i class="ph ph-camera-rotate text-4xl text-accent mb-6"></i>
+                    <h3 class="font-serif text-xl text-white mb-4 group-hover:text-accent transition-colors">03. 藝術寫真與<br>自我價值重塑</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed mb-6 flex-grow">
+                        為渴望紀錄生命重要階段或探索多面自我者量身打造。透過高級訂製的風格企劃與細膩的情緒捕捉，帶領你跨越鏡頭框架，定格兼具美學張力與情感溫度的個人代表作。
+                    </p>
+                    <a href="#contact" class="text-xs tracking-widest text-white uppercase flex items-center group-hover:text-accent transition-colors">
+                        預約專屬企劃 <i class="ph ph-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 作品集 / 案例展示 (Portfolio) -->
+    <section id="portfolio" class="py-24 px-6 md:px-12 lg:px-24 bg-darker">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 space-y-6 md:space-y-0">
+                <div>
+                    <h4 class="text-accent tracking-widest text-sm uppercase mb-2">Featured Works</h4>
+                    <h2 class="font-serif text-3xl md:text-4xl text-white">精選作品集</h2>
+                </div>
+                
+                <!-- 分類篩選器 -->
+                <div class="flex flex-wrap gap-4 text-sm tracking-wider font-light">
+                    <button class="filter-btn active text-accent border-b border-accent pb-1" data-filter="all">全部 ALL</button>
+                    <button class="filter-btn text-gray-500 hover:text-white pb-1 transition-colors" data-filter="personal">個人形象</button>
+                    <button class="filter-btn text-gray-500 hover:text-white pb-1 transition-colors" data-filter="commercial">商業人像</button>
+                    <button class="filter-btn text-gray-500 hover:text-white pb-1 transition-colors" data-filter="art">藝術寫真</button>
+                </div>
+            </div>
+
+            <!-- 圖片網格 (Masonry-like layout using columns) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+                
+                <!-- 項目 1: 個人形象 -->
+                <div class="gallery-item relative overflow-hidden group cursor-pointer aspect-[3/4]" data-category="personal" onclick="openLightbox('https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1200&auto=format&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop" alt="Corporate Headshot" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-accent text-xs tracking-widest mb-1">Corporate Headshot</span>
+                        <h3 class="text-white font-serif text-lg">專業經理人形象</h3>
+                    </div>
+                </div>
+
+                <!-- 項目 2: 商業人像 -->
+                <div class="gallery-item relative overflow-hidden group cursor-pointer aspect-square sm:aspect-[3/4]" data-category="commercial" onclick="openLightbox('https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" alt="Commercial Fashion" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-accent text-xs tracking-widest mb-1">Fashion Lookbook</span>
+                        <h3 class="text-white font-serif text-lg">品牌秋冬型錄</h3>
+                    </div>
+                </div>
+
+                <!-- 項目 3: 藝術寫真 -->
+                <div class="gallery-item relative overflow-hidden group cursor-pointer aspect-[3/4]" data-category="art" onclick="openLightbox('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="Fine Art Portrait" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-accent text-xs tracking-widest mb-1">Fine Art</span>
+                        <h3 class="text-white font-serif text-lg">光影流動寫真</h3>
+                    </div>
+                </div>
+
+                <!-- 項目 4: 藝術寫真 -->
+                <div class="gallery-item relative overflow-hidden group cursor-pointer aspect-square sm:aspect-[3/4]" data-category="art" onclick="openLightbox('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1200&auto=format&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop" alt="Creative Portrait" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-accent text-xs tracking-widest mb-1">Creative</span>
+                        <h3 class="text-white font-serif text-lg">黑白質感探索</h3>
+                    </div>
+                </div>
+
+                <!-- 項目 5: 個人形象 -->
+                <div class="gallery-item relative overflow-hidden group cursor-pointer aspect-[3/4]" data-category="personal" onclick="openLightbox('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1200&auto=format&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop" alt="Consultant Headshot" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-accent text-xs tracking-widest mb-1">Professional</span>
+                        <h3 class="text-white font-serif text-lg">顧問講師形象</h3>
+                    </div>
+                </div>
+
+                <!-- 項目 6: 商業人像 -->
+                <div class="gallery-item relative overflow-hidden group cursor-pointer aspect-square sm:aspect-[3/4]" data-category="commercial" onclick="openLightbox('https://images.unsplash.com/photo-1502323777036-f29e3972d82f?q=80&w=1200&auto=format&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1502323777036-f29e3972d82f?q=80&w=800&auto=format&fit=crop" alt="Editorial" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-accent text-xs tracking-widest mb-1">Editorial</span>
+                        <h3 class="text-white font-serif text-lg">雜誌專訪視覺</h3>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="https://instagram.com" target="_blank" class="inline-flex items-center text-gray-400 hover:text-white transition-colors text-sm tracking-wider">
+                    <i class="ph ph-instagram-logo mr-2 text-xl"></i> 在 Instagram 觀看更多作品
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 拍攝流程簡介 (How It Works) -->
+    <section class="py-24 px-6 md:px-12 lg:px-24 bg-dark border-y border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl text-white">專業拍攝流程</h2>
+                <p class="text-gray-400 mt-4 font-light text-sm">從企劃到交件，提供完整安心的專屬體驗</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+                <!-- 裝飾線 (僅桌面版顯示) -->
+                <div class="hidden lg:block absolute top-1/4 left-[12.5%] right-[12.5%] h-px bg-white/10 z-0"></div>
+                
+                <!-- 步驟 1 -->
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-darker border border-accent/50 flex items-center justify-center mb-6 text-accent">
+                        <span class="font-serif text-xl">1</span>
+                    </div>
+                    <h3 class="text-white font-medium mb-2">線上諮詢預約</h3>
+                    <p class="text-gray-500 text-sm font-light">確認需求、報價與檔期，支付定金保留時段。</p>
+                </div>
+                <!-- 步驟 2 -->
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-darker border border-white/20 flex items-center justify-center mb-6 text-gray-400">
+                        <span class="font-serif text-xl">2</span>
+                    </div>
+                    <h3 class="text-white font-medium mb-2">風格企劃溝通</h3>
+                    <p class="text-gray-500 text-sm font-light">拍攝前提供造型建議、場景選擇與情緒引導指南。</p>
+                </div>
+                <!-- 步驟 3 -->
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-darker border border-white/20 flex items-center justify-center mb-6 text-gray-400">
+                        <span class="font-serif text-xl">3</span>
+                    </div>
+                    <h3 class="text-white font-medium mb-2">當日專業拍攝</h3>
+                    <p class="text-gray-500 text-sm font-light">引導放鬆肢體，精準打光，可現場即時確認畫面。</p>
+                </div>
+                <!-- 步驟 4 -->
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-darker border border-white/20 flex items-center justify-center mb-6 text-gray-400">
+                        <span class="font-serif text-xl">4</span>
+                    </div>
+                    <h3 class="text-white font-medium mb-2">精修與交件</h3>
+                    <p class="text-gray-500 text-sm font-light">線上挑片，高階膚質肌理精修，雲端交付高畫質圖檔。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. 預約與聯絡我 (Contact & Booking) -->
+    <section id="contact" class="py-24 px-6 md:px-12 lg:px-24 bg-darker">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <!-- 聯絡資訊 -->
+            <div class="space-y-10">
+                <div>
+                    <h4 class="text-accent tracking-widest text-sm uppercase mb-2">Booking</h4>
+                    <h2 class="font-serif text-3xl md:text-4xl text-white mb-6">開始你的專屬拍攝企劃</h2>
+                    <p class="text-gray-400 font-light text-sm md:text-base leading-relaxed">
+                        準備好為自己留下一份深具質感的紀錄了嗎？請填寫右側表單，或透過社群與我們聯繫。我們將於 24 小時內回覆您的需求。
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="flex items-start space-x-4">
+                        <i class="ph ph-map-pin text-2xl text-accent"></i>
+                        <div>
+                            <h4 class="text-white font-medium text-sm mb-1">攝影棚位置</h4>
+                            <p class="text-gray-500 text-sm font-light">台北市中山區某某路 123 號 4 樓<br>(預約制，採光實景棚)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <i class="ph ph-envelope-simple text-2xl text-accent"></i>
+                        <div>
+                            <h4 class="text-white font-medium text-sm mb-1">Email</h4>
+                            <p class="text-gray-500 text-sm font-light">booking@personalbrand.studio</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-8 border-t border-white/10">
+                    <h4 class="text-white font-medium text-sm mb-4">追蹤我們</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-dark flex items-center justify-center border border-white/10 hover:border-accent hover:text-accent transition-colors">
+                            <i class="ph ph-instagram-logo text-xl"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-dark flex items-center justify-center border border-white/10 hover:border-accent hover:text-accent transition-colors">
+                            <i class="ph ph-facebook-logo text-xl"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-dark flex items-center justify-center border border-white/10 hover:border-accent hover:text-accent transition-colors text-sm font-bold">
+                            LINE
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 預約表單 -->
+            <div class="bg-dark p-8 md:p-10 border border-white/5 shadow-2xl">
+                <form onsubmit="handleFormSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-xs text-gray-400 tracking-wider">姓名 NAME</label>
+                            <input type="text" required class="w-full bg-darker border border-white/10 p-3 text-white focus:outline-none focus:border-accent transition-colors text-sm" placeholder="您的稱呼">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs text-gray-400 tracking-wider">聯絡信箱 EMAIL</label>
+                            <input type="email" required class="w-full bg-darker border border-white/10 p-3 text-white focus:outline-none focus:border-accent transition-colors text-sm" placeholder="example@email.com">
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <label class="text-xs text-gray-400 tracking-wider">拍攝需求 SERVICE</label>
+                        <select class="w-full bg-darker border border-white/10 p-3 text-white focus:outline-none focus:border-accent transition-colors text-sm appearance-none cursor-pointer">
+                            <option value="">請選擇拍攝方案...</option>
+                            <option value="1">企業與個人形象權威打造</option>
+                            <option value="2">商業人像與品牌故事敘事</option>
+                            <option value="3">藝術寫真與自我價值重塑</option>
+                            <option value="other">其他客製化需求</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs text-gray-400 tracking-wider">預計拍攝月份 TIMEFRAME</label>
+                        <input type="month" class="w-full bg-darker border border-white/10 p-3 text-white focus:outline-none focus:border-accent transition-colors text-sm color-scheme-dark">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs text-gray-400 tracking-wider">想告訴我們的話 MESSAGE</label>
+                        <textarea rows="4" class="w-full bg-darker border border-white/10 p-3 text-white focus:outline-none focus:border-accent transition-colors text-sm resize-none" placeholder="請簡述您的品牌背景、拍攝用途或希望呈現的風格..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-white text-dark font-medium hover:bg-accent transition-colors duration-300 tracking-widest text-sm">
+                        送出預約諮詢
+                    </button>
+                    <p class="text-xs text-center text-gray-600 mt-4">送出表單即代表您同意我們的預約與隱私政策。</p>
+                </form>
+                
+                <!-- 送出成功提示框 (預設隱藏) -->
+                <div id="success-msg" class="hidden mt-4 p-4 bg-green-900/30 border border-green-500/50 text-green-400 text-sm text-center">
+                    表單已送出，我們將盡快與您聯繫！
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-darker border-t border-white/5 text-center text-xs text-gray-600 font-light tracking-wider">
+        <p>&copy; 2024 Personal Brand Photography Studio. All Rights Reserved.</p>
+    </footer>
+
+    <!-- 燈箱 (Lightbox) 結構 -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex justify-center items-center opacity-0 transition-opacity duration-300" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-white hover:text-accent transition-colors focus:outline-none" onclick="closeLightbox()">
+            <i class="ph ph-x text-3xl"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Full size" class="max-w-[90vw] max-h-[90vh] object-contain shadow-2xl scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 1. 手機版選單切換
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. 導覽列滾動背景變化
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-dark/95', 'shadow-lg');
+                navbar.classList.remove('bg-dark/80');
+            } else {
+                navbar.classList.add('bg-dark/80');
+                navbar.classList.remove('bg-dark/95', 'shadow-lg');
+            }
+        });
+
+        // 3. 作品集分類篩選
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 移除所有按鈕的 active 狀態
+                filterBtns.forEach(b => {
+                    b.classList.remove('text-accent', 'border-accent');
+                    b.classList.add('text-gray-500', 'border-transparent');
+                });
+                // 添加點擊按鈕的 active 狀態
+                btn.classList.add('text-accent', 'border-accent');
+                btn.classList.remove('text-gray-500', 'border-transparent');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                        // 簡單的淡入動畫
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.9)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300); // 配合 CSS transition
+                    }
+                });
+            });
+        });
+
+        // 4. 燈箱功能 (Lightbox)
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(imgSrc) {
+            lightboxImg.src = imgSrc;
+            lightbox.classList.remove('hidden');
+            // 觸發重新渲染以實現過渡效果
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+                lightboxImg.classList.remove('scale-95');
+                lightboxImg.classList.add('scale-100');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // 鎖定背景滾動
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('opacity-0');
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                lightboxImg.src = '';
+            }, 300);
+            document.body.style.overflow = 'auto'; // 恢復背景滾動
+        }
+
+        // 5. 表單提交模擬 (避免重整)
+        function handleFormSubmit(event) {
+            event.preventDefault(); // 阻止表單預設送出行為
+            const form = event.target;
+            const btn = form.querySelector('button[type="submit"]');
+            const msg = document.getElementById('success-msg');
+            
+            // 模擬發送狀態
+            const originalText = btn.innerText;
+            btn.innerText = '處理中...';
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+
+            // 模擬非同步請求 (例如發送至 API)
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+                btn.classList.remove('opacity-50');
+                form.reset();
+                msg.classList.remove('hidden'); // 顯示成功訊息
+                
+                // 3秒後隱藏訊息
+                setTimeout(() => {
+                    msg.classList.add('hidden');
+                }, 3000);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
